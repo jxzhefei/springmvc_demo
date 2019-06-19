@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.instamina.study.springmvc.demo.dao.UserDao">
+    <select id="queryAll" resultMap="userList">
+        select * from user
+    </select>
+    <resultMap id="userList" type="com.instamina.study.springmvc.demo.entity.User">
+        <id property="id" column="id"></id>
+        <result property="userId" column="user_id"></result>
+        <result property="userName" column="user_name"></result>
+        <result property="email" column="email"></result>
+        <result property="birthday" column="birthday"></result>
+        <result property="sex" column="sex"></result>
+    </resultMap>
+    <select id="queryById" parameterType="int" resultType="com.instamina.study.springmvc.demo.entity.User">
+       select * from user where id=#{id}
+    </select>
+</mapper>
