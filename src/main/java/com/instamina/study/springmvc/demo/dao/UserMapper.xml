@@ -3,10 +3,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.instamina.study.springmvc.demo.dao.UserDao">
-    <select id="queryAll" resultMap="userList">
+    <select id="listAll" resultMap="userList">
         select * from user
     </select>
-    <resultMap id="userList" type="com.instamina.study.springmvc.demo.entity.User">
+    <resultMap id="userList" type="user">
         <id property="id" column="id"></id>
         <result property="userId" column="user_id"></result>
         <result property="userName" column="user_name"></result>
@@ -14,7 +14,16 @@
         <result property="birthday" column="birthday"></result>
         <result property="sex" column="sex"></result>
     </resultMap>
-    <select id="queryById" parameterType="int" resultType="com.instamina.study.springmvc.demo.entity.User">
+    <select id="getUserById" parameterType="int" resultType="user">
        select * from user where id=#{id}
     </select>
+    <delete id="deleteById" parameterType="int" >
+        delete from user where id=#{id}
+    </delete>
+    <insert id="save" parameterType="user">
+        insert into user (user_id,user_name,birthday,email,sex) values(#{userId},#{userName},#{birthday},#{email},#{sex})
+    </insert>
+    <update id="update" parameterType="user">
+        update user set user_id=#{userId},user_name=#{userName},birthday=#{birthday},email=#{email},sex=#{sex} where id=#{id}
+    </update>
 </mapper>

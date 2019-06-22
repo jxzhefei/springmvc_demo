@@ -1,5 +1,7 @@
 package com.instamina.study.springmvc.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,6 +10,7 @@ public class User implements Serializable {
     private String userId;
     private String userName;
     private String email;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date birthday;
     private String sex;
 

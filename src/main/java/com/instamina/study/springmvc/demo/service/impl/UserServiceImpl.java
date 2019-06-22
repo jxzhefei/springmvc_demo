@@ -14,14 +14,59 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private SqlSessionFactory sqlSessionFactory;
-    public List<User> queryAll(){
+
+    public List<User> listAll(){
         SqlSession session = sqlSessionFactory.openSession();
-        UserDao userDao = session.getMapper(UserDao.class);
-        return userDao.queryAll();
+        try {
+            UserDao userDao = session.getMapper(UserDao.class);
+            return userDao.listAll();
+        } finally {
+            session.close();
+        }
+
     }
-    public User queryById(int id){
+    public User getUserById(int id){
         SqlSession session = sqlSessionFactory.openSession();
-        UserDao userDao = session.getMapper(UserDao.class);
-        return userDao.queryById(id);
+        try{
+            UserDao userDao = session.getMapper(UserDao.class);
+            return userDao.getUserById(id);
+        } finally{
+            session.close();
+        }
+    }
+
+    @Override
+    public void deleteById(int id) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try{
+            UserDao userDao = session.getMapper(UserDao.class);
+            userDao.deleteById(id);
+        }finally{
+            session.close();
+        }
+
+    }
+
+    @Override
+    public void save(User user) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try{
+            UserDao userDao = session.getMapper(UserDao.class);
+            userDao.save(user);
+        }finally{
+            session.close();
+        }
+
+    }
+
+    @Override
+    public void update(User user) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try{
+            UserDao userDao = session.getMapper(UserDao.class);
+            userDao.update(user);
+        }finally{
+            session.close();
+        }
     }
 }
